@@ -1,0 +1,78 @@
+%===============================================================================
+% $Id: ifacconf.tex 19 2011-10-27 09:32:13Z jpuente $  
+% Template for IFAC meeting papers
+% Copyright (c) 2007-2008 International Federation of Automatic Control
+%===============================================================================
+\documentclass{ifacconf}
+
+\usepackage{graphicx}      % include this line if your document contains figures
+\usepackage{natbib}        % required for bibliography
+%===============================================================================
+\begin{document}
+\begin{frontmatter}
+
+\title{R \& GIS: Geospatial Plotting} 
+% Title, preferably not more than 10 words.
+
+\thanks[footnoteinfo]{Sponsor and financial support acknowledgment
+goes here. Paper titles should be written in uppercase and lowercase
+letters, not all uppercase.}
+
+\author[First]{Florian Endel} 
+\author[Second]{Peter Filzmoser} 
+
+\address[First]{FFG IFEDH project, Student at Vienna University of Technology (e-mail: florian@endel.at).}
+\address[Second]{Department of Statistics and Probability Theory,
+Vienna University of Technology (e-mail: P.Filzmoser@tuwien.ac.at)}
+
+\begin{abstract}                % Abstract of not more than 250 words.
+Examples of spatial data within the R environment and the combination of R with data sets, spatial
+tools, libraries and other software products, which are common in real life environments, are provided in this paper.
+
+Beginning with the setup of a new project using Git and an online repository, a Document build by Sweave - a
+combination of R and \LaTeX{} - is explained. Once the fundamental setup is working rudimentarily, the import
+of data and (geo-) spatial information from different sources is shown. Finnaly some examples of spatial plots
+using the \textit{sp} package in R are  included.
+
+Additionally some tools like "integrated development environments" (IDE), 
+which may be supportive during the daily work
+and help newcomers learning the presented techniques, 
+are mentioned and specific programs are recommended.
+\end{abstract}
+
+\begin{keyword}
+R, Sweave, \LaTeX{}, Spatial Data, Git
+\end{keyword}
+
+\end{frontmatter}
+%===============================================================================
+
+\section{Introduction}
+Building a sophisticated report including spatial data, plots and usefule information
+(normally) takes some effort. 
+
+\section{Setup of the project}
+
+Git
+
+\section{Document Structure}
+
+LaTeX, Sweave
+
+\section{About Data}
+
+getting Data from files, DB and online resources
+
+
+\section{Geospatial Plotting}
+
+examples of Geospatial Plots
+
+\section{Conclusion}
+
+
+
+\bibliography{lit}            
+
+
+\end{document}
