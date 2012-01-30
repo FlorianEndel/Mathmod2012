@@ -58,7 +58,8 @@
 
 % hyperlinks an linebreaking of links
 \usepackage{url}
-\usepackage{breakurl}
+%\usepackage{breakurl}
+
 
 %===============================================================================
 \begin{document}
@@ -130,7 +131,7 @@ the implementation and combination of several software tools during ongoing
 projects may still be challanging.
 
 Additionally the awareness of great open source
-\footnote{Open Source Initiative: Definition of Open Source \url{http://www.opensource.org/osd.html}} 
+(Open Source Initiative: Definition of Open Source \url{http://www.opensource.org/osd.html}) 
 software products, which are 
 definitely ready to be used on a regular basis, especially the power of "The R Project
 for Statistical Computing", should be extended.
@@ -174,8 +175,8 @@ the repositories of almost every linux distribution), a folder for the new proje
 created on the local file system. 
 
 If there is absolutely no possiblility to install
-the official git compilation, a pure Java implementation of git called JGit\footnote{jgit homepage: 
-\url{http://eclipse.org/jgit/}} can be used. JGit does not need any installation or
+the official git compilation, a pure Java implementation of git called JGit (jgit homepage: 
+\url{http://eclipse.org/jgit/}) can be used. JGit does not need any installation or
 extended administrative rights, be a current "Java Runtime Environment" (JRE) has
 to be installed. Besides the EGit plugin of the Eclipse "Integrated Development 
 Environment" (IDE) there are hardly any additional (graphical) tools which are able
@@ -196,7 +197,7 @@ the mentioned JGit implementation.
 \begin{center}
 \includegraphics[width=8.4cm]{pics/EGit.png}    % The printed column width is 8.4 cm.
 \caption{git repositories presented by EGit / JGit in Eclipse IDE \newline 
-screenshot provided by \url{http://eclipse.org/egit/} [2012-01-29]} 
+screenshot provided by http://eclipse.org/egit/ [2012-01-29]} 
 \label{fig:JGit}
 \end{center}
 \end{figure}
@@ -205,6 +206,9 @@ Besides different, mostly platform dependent tools,
 SmartGit represents a current and very functional GUI, which
 is available on all popular operating system. Although SmartGit is sold commercially,
 a free version for non-commercial projects offered.
+
+Additionally RStudio, a quite new development environment for R supports git (and subversion)
+directly since January 2012.
 
 
 \subsection{git init \& clone}
@@ -330,17 +334,17 @@ of the repository of this paper (listing \ref{git:clone}) is marked (tagged) as 
 
 \begin{figure}[h]
 \begin{center}
-\includegraphics[height=6cm,angle=90]{pics/Smartgit_graphical_Log.png}    % The printed column width is 8.4 cm.
+\includegraphics[width=8.4cm]{pics/Smartgit_graphical_Log.png}    % The printed column width is 8.4 cm.
 \caption{example for a git changelog and history of commits visualized with Smartgit \newline 
-screenshot provided by \url{http://www.syntevo.com/smartgit/} [2012-01-29]} 
+screenshot provided by http://www.syntevo.com/smartgit [2012-01-29]} 
 \label{fig:gitHistory}
 \end{center}
 \end{figure}
 
 \section{\LaTeX, R \& Sweave}\label{sec:structure}
 
-Once the git repository is set up, the Sweave document has be arranged. 
-In the following paragraphs, the mentioned technologies are briefly introduced.
+Once the git repository is set up, the Sweave document has to be arranged. 
+In the following paragraphs, involved technologies are briefly introduced.
 
 Some central properties are shared by all of them. Availability under a open source license, 
 platform independence, multilingualism, lots of documentation and a strong and proofen 
@@ -348,26 +352,151 @@ community willing to help are the most important characteristics of these
 
 
 \subsection{R}
-R\cite{R} is known as an upcoming statistical environment. 
+R \citep{R} is known as an upcoming statistical environment. 
 
+As an open source successor of S, it is known to be a powerful and flexible programming language
+and computing environment. Especially everyone’s ability to utilize and
+contribute to the very rich environment of additional packages hosted 
+mainly on “The Comprehensive R Archive Network” are good reasons to give R a try. 
+More advanced userRs (spelling “user” and “developer” with capital
+’R’s is common in the R community) may use different extensions in 
+addition to the variaty of basic packages a normal installation offers.
+Most of the more sophisticated packages provide worthwhile 
+introductions and even extensive literature. 
 
+R is mainly used by a command line interface. Although this - in comparison
+to current graphical user interfaces outdated - way to communicate 
+with a computer prgram got a quite steep learning curve, pracitical 
+advantages induce many users to learn and stick with it. Mainly the
+ease of combining playful exploration of datasets and automatic
+reproduction of any steps taken using script- or batch-files are advantageous.
+
+Also the following examples, using special packages providing methods 
+for spatial data, may be executed on a simple terminal, a graphical frontend to R,
+a remote server or inside a Sweave document. This flexibility enables 
+the usage of the same R source code within a database
+\footnote{for example \textit{plr} (\url{http://www.joeconway.com/plr/} [2012-01-30]) for PostgreSQL 
+\citep{group2011postgresql}}, a local PC and even servers and cloud services.
+
+Of course there are also some graphical user interfaces which may support
+the usage of R. The most popular and beginner friendly solutions are
+Eclipse with the StatEt plugin and first of all the lately published RStudio
+(\url{http://rstudio.org/}). Both are open source and platform independet solution,
+which offer many other advantages like project management, integration of version 
+management (git), support for Sweave and a client/server separation.
+
+While Eclipse provides considerably more additional plugins and possibilites,
+RStudio can be highly recommended to all useRs.
 
 \subsection{Sweave}
+Sweave is defined in the official manual \citep{Sweave:Leisch:2002} as follows:
+\begin{quotation}
+Sweave provides a flexible 
+framework for mixing text 
+and S code for automatic document generation. 
+A single source file contains both documentation text and S code, which are then woven
+into a final document
+\end{quotation} 
+
+As explained above, R is an open source implementation of S. Therefore both 
+language may be interchangeable.
+
+In 2002, Sweave was presented in the former "R Journal"
+(\url{http://journal.r-project.org/}) called "R News" (official archive of R News: \url{http://cran.r-project.org/doc/Rnews/}). In the first part of this 
+introduction, Sweave is summarized briefely \citep{Sweave:Leisch:2002}:
+
+\begin{quotation}
+The purpose of Sweave is to create dynamic reports, 
+which can be updated automatically if data or
+analysis change. Instead of inserting a prefabricated
+graph or table into the report, the master document
+contains the R code necessary to obtain it. When run
+through R, all data analysis output (tables, graphs, ...) 
+is created on the fly and inserted into a final \LaTeX
+document. The report can be automatically updated
+if data or analysis change, which allows for truly reproducible research.
+\end{quotation}
+
+Normally Sweave files got the file extension \texttt{.Rd}. 
+After executing \texttt{R CMD Sweave} followed be the filename
+of the Sweave document, all R-code is extracted from the document and executed using R.
+The results are merged with the \LaTeX code of the \texttt{.Rd} file and saved
+to as \texttt{.tex} file with the same filename. Afterwards the common 
+compilation using \texttt{latex}, \texttt{pdflatex}, \texttt{bibtex}, and so on
+can be performed.
 
 \subsection{simple Sweave document}
 
-\section{About Data}
+This subsection shows the basic structure of a Sweave document. As this
+paper is written using \LaTeX and R, another working example can be found
+in the git repository, described in Listing \ref{git:clone} on page
+\pageref{git:clone}.
 
-getting Data from files, DB and online resources
+At the beginning (line 1 to 5) of Listing \ref{sweave:simple}, a very simple
+\LaTeX-Document is shown. On line 6 an R-environment is declared using 
+the "noweb" syntax, which is described in \cite{Ramsey_1994, Johnson_Johnson_2000}.
+Between \newline \texttt{<<label1, echo=false, results=hide>>=} \newline and the
+@-sign, R source code can be located. In the header of the environment are
+some (local) settings an the name, which is displayed during the
+compilation process, located. The \textit{results} setting defines how
+output generated by R should be handled by the \LaTeX processor and \textit{echo}
+configures wether messages from R should be included in the output.
 
+More details about configuration of the noweb-environment of Sweave can
+be found in the official manual \citep{SweaveManual}.
+
+Some additional functionalities are shown in the example. In addition to the
+whole declaration, any appearance of \texttt{\textbackslash{}Sexpr\{\#R-Code\}}
+is also exected by R an any output is included in the document. This may be
+quite useful if single values of an calculation should be inserted into 
+continous text.
+
+\texttt{\textbackslash{}SweaveInput\{filename\}} can be used to include 
+another Sweave file. Although importing additional souce code can be realized with
+R, partitioning a document to several Sweave files may be handy.
+
+All single R environments which are executed in the same process share one
+global namespace. Also libraries, like \texttt{xtable} (loaded on line 7), which eases the
+creation of \LaTeX tables out of data stored in R, are
+available throughout the document.
+
+
+\lstset{language=Octave,caption={basic structure of a Sweave document},label=sweave:simple}
+\begin{lstlisting}
+\documentclass[a4paper]{article}
+% additional \LaTeX configuration
+
+\begin{document}
+
+<<label1, echo=false, results=hide>>=
+library(xtable)
+# R code following
+@
+
+<<LaTex_Output, echo=hide, results=tex>>=
+# R code generating \LaTeX
+@
+
+<<>>=
+# empty header, standard settings
+@
+
+Normal \LaTeX code and a single line from \Sexpr{print('R')}.
+
+\SweaveInput{./includes/config}
+
+
+\end{document}
+\end{lstlisting}
 
 \section{Geospatial Plotting}
 
-examples of Geospatial Plots
+Finally the most important preparations are ready and some geospatial plots 
+generated using R can be shown. 
 
 \section{Conclusion}
 
-\nocite{*}
+
 \bibliography{lit}   
 
 \end{document}
