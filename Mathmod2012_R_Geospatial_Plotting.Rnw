@@ -137,8 +137,9 @@ Additionally the amount of time, manpower and funding
 may be sometimes quite short.
 
 The adaption of technologies presented in this paper should help to overcome
-some of these challenges. Although there are great resources, beginning with 
-basic tutorials up to sophisticated books for every delineated software product,
+some of these challenges. Although there are great learning and information resources, 
+beginning with 
+basic up to sophisticated books for every delineated software product,
 useful examples of the whole workflow are still quite rare. Therefore the 
 practical utilization of one single technique may be well documented, but
 the implementation and combination of several software tools during an ongoing
@@ -166,8 +167,8 @@ imported from other sources, the creation of geospatial plots is illustrated.
 
 It should be obvious, that only a basic introduction and different examples 
 can be provided in this document. Further details about this report can be
-looked up in the online repository. Additionally some useful online resources
-and other references are included.
+looked up in the online repository (\url{https://github.com/FlorianEndel/Mathmod2012}). 
+Additionally some useful online resources and other references are included.
 
 \section{Setup of the project}
 
@@ -379,7 +380,7 @@ screenshot provided by http://www.syntevo.com/smartgit [2012-01-29]}
 \section{\LaTeX, R \& Sweave}\label{sec:structure}
 
 Once the git repository is set up, the Sweave document has to be arranged. 
-In the following paragraphs, involved technologies are briefly introduced.
+In the following paragraphs involved technologies are briefly introduced.
 
 Some central properties are shared by all of them. Availability under a open source license, 
 platform independence, multilingualism, lots of documentation and a strong and proofen 
@@ -600,7 +601,7 @@ of each district is displayed over the particular centroid (without collisions).
 
 \section{Result}
 These simple examples 
-may induce a suspicion of the vast possibilities of the presented techniques and 
+may induce a vision  of the vast possibilities of the presented techniques and 
 especially their combination. Integration with established systems like Grass,
 utilization of Open Data and Open Government resources, cloud computing and many other 
 current trends can all be handled sophisticatedly. The low price and
