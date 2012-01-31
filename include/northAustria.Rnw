@@ -1,0 +1,61 @@
+<<northAustria>>=
+
+library(maptools)
+library(maps)
+library(sp)
+library(RColorBrewer)
+
+###### RData
+load("./include/AUT_adm2.RData")
+
+# convert to readable text
+gadm$bezirk = factor(iconv(gadm$NAME_2, "ISO_8859-2", "UTF-8"))
+gadm$bundesland = factor(iconv(gadm$NAME_1, "ISO_8859-2", "UTF-8"))
+
+# Invertierung der Levels --> richtige Reihenfolge der colorkeys im plot
+gadm$bezirk = factor(gadm$bezirk, levels=rev(levels(factor(gadm$bezirk))))
+gadm$bundesland = factor(gadm$bundesland,  levels = rev(levels(factor(gadm$bundesland))))
+
+
+###### reduces plot to region
+# https://stat.ethz.ch/pipermail/r-sig-geo/2007-October/002701.html
+
+# copy selected data
+region = new("SpatialPolygonsDataFrame")
+region = gadm[gadm$bundesland==unique(gadm$bundesland)[3],] #Noe
+region = spRbind(region, gadm[gadm$bundesland=="Wien",])
+region = spRbind(region, gadm[gadm$bundesland==unique(gadm$bundesland)[4],]) #Ooe
+
+
+# recalculate and reorder factors (for plotting)
+region$NAME_1=factor(region$NAME_1, levels = rev(levels(factor(region$NAME_1))))
+region$NAME_2=factor(region$NAME_2, levels = rev(levels(factor(region$NAME_2))))
+region$bundesland = factor(region$bundesland,  levels = levels(factor(region$bundesland)))
+region$bezirk = factor(region$bezirk, levels=levels(factor(region$bezirk)))
+
+# data / color codes
+testdata = sample(1:5, length(levels(region$bezirk)), replace=TRUE)
+
+cols = heat.colors(5)
+col=cols[testdata]
+
+col[33]="#000000"
+
+
+png(paste(dir.pic, "northAustria.png", sep=''), width=550, height=300)
+
+# plot
+spplot(region, 
+    "bezirk", 
+    col.regions=rev(col),
+    col="black", 
+    scales=list(draw = FALSE), 
+    colorkey=FALSE, 
+    regions=TRUE, 
+    sp.layout = list("sp.text", coordinates(region), as.character(region$bezirk), cex=0.6)
+)
+
+dev.off()
+
+
+@ 

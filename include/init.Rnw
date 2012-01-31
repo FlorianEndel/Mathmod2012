@@ -1,0 +1,67 @@
+<<RInit>>=
+
+
+# PATH
+dir.local = "/home/floe/Documents/Work/Projekte/Konferenz/Mathmod 2012 (Vienna)/Paper/git/"
+setwd(dir.local)
+dir.pic = paste(dir.local, "pics/", sep="")
+dir.log = paste(dir.local, "log/", sep="")
+
+# Config
+cache = TRUE
+cache.graph = TRUE
+cluster = FALSE
+
+# LIB
+# library(DBI)
+# library(RPostgreSQL)
+library(log4r)
+library(xtable)
+library(sqldf)
+library(stringr)
+library(reshape)
+library(ggplot2)
+library(cacheSweave)
+
+if (cluster) {
+	library(snowfall)
+}
+	
+
+# Logger
+logger  = create.logger()
+logfile(logger) = paste(dir.log, 'log', sep = "")
+level(logger) = log4r:::DEBUG
+
+info(logger, "START")
+
+# DB
+# debug(logger, "loading DB")
+# info(logger, "CHANGE DB LOGIN CREDENTIALS")
+# strDriverName = 'PostgreSQL'
+# dbiDri = dbDriver(strDriverName)
+# dbiCon = dbConnect(dbiDri, dbname='gapdrg', 
+# 	user='username', password='pwd', 
+# 	host='db-ic', port=5432)
+	
+	
+# Cluster: Snowfall
+if (cluster) {
+	debug(logger, "starting cluster")
+	sfInit(parallel=TRUE, cpus=4)
+	
+	sfExport("dir.log")
+	sfExport("dir.local")
+	sfExport("dir.data")
+	sfExport("dir.pic")
+	
+	sfExport("logger")
+
+	sfLibrary(log4r)
+	sfLibrary(ggplot2)
+	sfLibrary(sqldf)
+	
+
+}
+
+@	

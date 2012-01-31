@@ -1,0 +1,27 @@
+\lstset{language=Octave,caption={basic structure of a Sweave document},label=sweave:simple}
+\begin{lstlisting}
+\documentclass[a4paper]{article}
+% additional \LaTeX configuration
+
+\begin{document}
+
+<<label1, echo=false, results=hide>>=
+library(xtable)
+# R code following
+@
+
+<<LaTex_Output, echo=hide, results=tex>>=
+# R code generating \LaTeX
+@
+
+<<>>=
+# empty header, standard settings
+@
+
+Normal \LaTeX code and a single line from \Sexpr{print('R')}.
+
+\SweaveInput{./includes/config}
+
+
+\end{document}
+\end{lstlisting} 

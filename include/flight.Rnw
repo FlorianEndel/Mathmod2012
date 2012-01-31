@@ -1,0 +1,34 @@
+<<flightpatterns>>=
+
+library(maps)
+library(geosphere)
+
+airports <- 	read.csv("http://datasets.flowingdata.com/tuts/maparcs/airports.csv", header=TRUE) 
+flights <- read.csv("http://datasets.flowingdata.com/tuts/maparcs/flights.csv", header=TRUE, as.is=TRUE)
+
+png(paste(dir.pic, "flights.png", sep=""), width=600, height=350, units='px')
+
+map("state")
+
+pal <- colorRampPalette(c("#888888", "black"))
+pal <- colorRampPalette(c("#888888", "blue"))
+colors <- pal(100)
+
+
+fsub <- flights[flights$airline == "AA",]
+fsub <- fsub[order(fsub$cnt),]
+maxcnt <- max(fsub$cnt)
+for (j in 1:length(fsub$airline)) {
+	air1 <- airports[airports$iata == fsub[j,]$airport1,]
+	air2 <- airports[airports$iata == fsub[j,]$airport2,]
+
+	inter <- gcIntermediate(c(air1[1,]$long, air1[1,]$lat), c(air2[1,]$long, air2[1,]$lat), n=100, addStartEnd=TRUE)
+	colindex <- round( (fsub[j,]$cnt / maxcnt) * length(colors) )
+
+	lines(inter, col=colors[colindex], lwd=0.8)
+}
+
+dev.off()
+
+
+@

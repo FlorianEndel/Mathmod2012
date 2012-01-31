@@ -1,0 +1,28 @@
+<<OSM>>=
+library(RgoogleMaps)
+
+box <- qbbox(lat = c(48.23, 48.175), lon = c(16.33, 16.4)) 
+
+
+OSM.map<-GetMap.OSM(lonR=box$lonR, latR=box$latR, scale = 100000, destfile='./pics/vienna_source.png') 
+
+# adjust for OSM
+# http://www.surefoss.org/visualisation/visualizing-gis-data-with-r-and-open-street-map/
+lat_adj <- function(lat, map){(map$BBOX$ll[1]-lat)/(map$BBOX$ll[1]-map$BBOX$ur[1])}
+lon_adj <- function(lon, map){(map$BBOX$ll[2]-lon)/(map$BBOX$ll[2]-map$BBOX$ur[2])}
+
+# my Home & TU Wien
+lat <- c(48.195) # y-Achse
+lon <- c(16.368) # x-Achse
+
+
+png(paste(dir.pic, "hometu.png", sep=''), width=281, height=331)
+
+PlotOnStaticMap(OSM.map,
+	lat_adj(lat, OSM.map), lon = lon_adj(lon, OSM.map), 
+	col='blue', pch=16, cex=5
+) 								
+
+dev.off()
+
+@
