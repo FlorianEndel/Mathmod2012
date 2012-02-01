@@ -102,7 +102,7 @@ in real life environments, are provided in this paper.
 Beginning with the setup of a new project using Git 
 and an online repository, a document build by Sweave - a
 combination of R and \LaTeX{} - is explained. Once the 
-fundamental setup is working rudimentarily, the import
+fundamental setup is working, the import
 of data and (geo-) spatial information from different 
 sources is shown. Finally some examples of spatial plots
 using (among others) the \textit{sp} package of R are included.
@@ -123,20 +123,20 @@ R, Sweave, \LaTeX{}, Spatial Data, Git
 \end{frontmatter}
 %===============================================================================
 
-\section{Introduction}
-Building a sophisticated report including spatial data and plots takes some effort.
+\section{introduction}
+Building a sophisticated report including spatial data and plots 
+usually takes some effort.
 
-Vast online resources and big data sets may overstrain
-even modern desktop computers, especially if common and established methods
+Vast online resources and big data sets may even overstrain
+modern desktop computers, especially if common established methods
 and routines need to scale up for new information. 
 Working in groups or spatial distributed teams,  
 changing requirements and specification, copyright issues, reproduction of 
-foreign (or even own) results  and updating reports using new data sets are common 
-problems during the lifetime of a project. 
-Additionally the amount of time, manpower and funding 
-may be sometimes quite short.
+foreign (or even own) results  and updating reports using new data sets frequently
+lead to problems over the lifetime of a project. 
+Additionally the available amount of time, manpower and funding tends to be restricted.
 
-The adaption of technologies presented in this paper should help to overcome
+The adaption of technologies presented in this paper should help to deal with
 some of these challenges. Although there are great learning and information resources, 
 beginning with 
 basic up to sophisticated books for every delineated software product,
@@ -145,36 +145,36 @@ practical utilization of one single technique may be well documented, but
 the implementation and combination of several software tools during an ongoing
 project may still be challenging.
 
-Additionally the awareness of great open source
+Furthermore the awareness of great open source
 (Open Source Initiative: Definition of Open Source \url{http://www.opensource.org/osd.html}) 
 software products, which are 
-definitely ready to be used on a regular basis, especially the power of "The R Project
+certainly ready to be used on a regular basis, especially the power of "The R Project
 for Statistical Computing", should be extended.
 
 This paper itself is build using the described technologies and therefore illustrates 
-all applied methods. To render the understanding and reproduction of the document 
-considerable simple and provide an example of the methods used, all source code is
-available online.
+all applied methods. To assist the understanding and reproduction of the document, 
+as well as to provide an example of the methods used, all source code is available 
+online (\url{https://github.com/FlorianEndel/Mathmod2012}).
 
-\section{Structure}
-The structure of this report is tailored towards a possible workflow of a (simple)
+\section{structure}
+The structure of this report is tailored towards a potential workflow of a (simple)
 research project. 
 
 Beginning with the setup of a (online) repository to track changes and manage 
-contributions of different team members, the structure of a Sweave document is
-explained. Using different data sets, partly provided within R packages, partly
+contributions from different team members, the structure of a Sweave document is
+explained. Using a variety of data sets, partly provided within R packages, partly
 imported from other sources, the creation of geospatial plots is illustrated. 
 
-It should be obvious, that only a basic introduction and different examples 
-can be provided in this document. Further details about this report can be
-looked up in the online repository (\url{https://github.com/FlorianEndel/Mathmod2012}). 
-Additionally some useful online resources and other references are included.
+It should be obvious that only a basic introduction and selected examples 
+can be shown in this document. Further information and details 
+are available in the online repository.
+Additionally some useful online resources and references are included.
 
-\section{Setup of the project}
+\section{project setup}
 
 Before exploring the data and writing the report can be started, git has to be setup.
 On the official homepage of the git project, the following short definition 
-is provided\footnote{\url{http://git-scm.com/} [2012-01-28]}:
+can be found\footnote{\url{http://git-scm.com/} [2012-01-28]}:
 
 \begin{quotation}
 Git is a free \& open source, distributed version control 
@@ -186,27 +186,29 @@ dependent on network access or a central server. Branching and merging are fast 
 \end{quotation}
 
 After installing the git software (binaries are available on the mentioned website and in 
-the repositories of almost every Linux distribution), a folder for the new project is 
+the repositories of almost every Linux distribution) a folder for the new project should be 
 created on the local file system. 
 
 If there is absolutely no possibility to install
 the official git compilation, a pure Java implementation of git called JGit (jgit homepage: 
 \url{http://eclipse.org/jgit/}) can be used. JGit does not need any installation or
-extended administrative rights, but a current "Java Runtime Environment" (JRE) has
+extended administrative rights, only a current "Java Runtime Environment" (JRE) has
 to be installed. Besides the EGit plugin of the Eclipse "Integrated Development 
 Environment" (IDE) there are hardly any additional (graphical) tools which are able
 to utilize JGit's functionality. Therefore users are bound to Eclipse or the 
 command line interface.
 
-Git also provides a graphical front-end called "Git Gui". Many tasks ranging from
-basic management of local and remote repositories up to complex merging can be
-achieved with it. Especially for novice git users Git Gui may provide a more even
-learning curve than the command line interface (CLI).
+Git also provides a graphical front-end called "Git Gui". Many tasks, ranging from
+basic management of local and remote repositories up to complex merging, can be
+achieved with it. Especially for novice git users "Git Gui" may support the learning 
+process better than the command line interface (CLI).
 
-Additionally there are some other graphical user interfaces (GUI) which
-simplify the usage of git. Eclipse IDE (\url{http://www.eclipse.org/}) includes the EGit
-(\url{http://eclipse.org/egit/}) plugin, a graphical git front-end based on
-the mentioned JGit implementation. 
+There also are some other graphical user interfaces (GUI) which
+simplify the usage of git. For example Eclipse IDE 
+(\url{http://www.eclipse.org/}) includes the EGit
+(\url{http://eclipse.org/egit/}) extension, a graphical git front-end based on
+the mentioned JGit implementation. Additionally RStudio, a quite new development 
+environment for R, supports git (and subversion) directly since January 2012.
 
 \begin{figure}[h]
 \begin{center}
@@ -218,21 +220,20 @@ screenshot provided by http://eclipse.org/egit/ [2012-01-29]}
 \end{figure}
 
 Besides different, mostly platform dependent tools, 
-SmartGit represents a current and very functional GUI, which
+SmartGit represents a current and functional GUI, which
 is available on all popular operating system. Although SmartGit is sold commercially,
-a free version for non-commercial projects is offered.
+a free version for non-commercial usage is offered.
 
-Additionally RStudio, a quite new development environment for R, supports git (and subversion)
-directly since January 2012.
+
 
 
 \subsection{git init \& clone}
-Now the local git repository can be set up by invoking the
+At this point the local git repository can be set up by invoking the
 command line command \textit{\lstinline!git init!} inside
 the folder of the current project. The \textit{\lstinline!git clone!} 
 command can be used for creating an exact copy of an available remote repository.
 
-How to clone (copy) the source of this paper, including the whole changelog, to a local folder 
+How to clone (copy) the source of this paper, including the entire changelog, to a local folder 
 and thereby create a local repository as an exact replica of the online version,
 is shown in \verb|line 1| of \textit{Listing \ref{git:clone}}. After the download has
 finished, the document can be compiled using the provided \textit{run.sh} script. 
@@ -241,13 +242,13 @@ Note that the example in \textit{Listing \ref{git:clone}} shows how to compile
 the \LaTeX-file generated by R and Sweave (both are described in chapter \ref{sec:structure}).
 Be aware that some settings need to be adapted to the local system. They are all stored
 in \textit{./include/init.Rnw}. It is possible to maintain a local configuration and 
-merge updates to the local source code by removing this file from the repository.
+merge updates with the local source code by removing this file from the repository.
 It is also necessary to install all loaded R packages (\textit{install.packages('name')}).
 
 There is a script (\textit{run.sh}) included which helps creating the document.
 
-Although the implementation of the sources takes place on different
-Linux distributions, the compilation should flawlessly work on other operating systems (OS).
+Although the implementation of the sources takes place on
+Linux distributions, the compilation should flawlessly work on other operating systems (OS) too.
 While the tools themselves are used in the same way on all popular systems, some details
 - like changing the directory using a terminal and setting up the search path to the binaries - is sometimes different.
 If the creation of the PDF-file does not work on a specific setup, a prefabricated
@@ -279,44 +280,45 @@ pdflatex Mathmod2012_R_Geospatial_Plotting.tex
 After creating a new local git repository or cloning remote sources, everyting is ready for
 editing the contents. Git does not anticipate specific software tools like special editors or file browsers. Any file in 
 the repository can be edited using any favorite program. Solely the folder (including all contents)
-\textit{.git} has to be ignored. Otherwise the local repository can easily be damaged.
+\textit{.git} has to remain untouched. Otherwise the local repository can easily be damaged.
 
 \subsection{git commit, pull, push}
 All changes can be permanently 
 added to git's history (the changelog) using \textit{\lstinline!git commit!} followed by a 
 summary of the changes made (line 1 in listing \ref{git:pullpush_simple}). 
 A committed version of the whole project can be restored later on and users are able to
-survey all changes over time. This may be
-quite useful if something breaks during the implementation of a new feature or adjustment of existing code.
-Also try and error approaches may be applied, because resetting a previous state of the whole project is 
-quite easy and fast. If the status of the whole project at a specific point in time is necessary, for example
-to compare published and updated versions or include comments from a review process, activating  
-a previous commit using \textit{\lstinline!git checkout [commit-id]!} may be feasible.
+track all changes over time. This is useful in case something breaks during 
+the implementation of a new feature or adjustment of existing code.
+Also try and error approaches may be applied, because resetting a previous state of the entire project is 
+rather easy and fast. If an elder version of the project is required, for example to compare 
+published and updated versions or include comments from a review process, activating  
+a previous commit using \textit{\lstinline!git checkout [commit-id]!} is feasible.
 
 After committing changes to the \textit{local} repository, it is possible to merge the local version 
-with the remote repository (if any exists and is configured) and provide all alterations to other team members or a
+with the remote repository (if any exists and is configured) and show all alterations to other team members or a
 public audience. Before someone pushes the local version to a (central) git server, all changes made
-by other people have to be downloaded and included into the own \textit{branch} of the projects source.
+by other people have to be downloaded and included into the own \textit{branch} of the project's source.
 Downloading and merging can easily be carried out using \textit{\lstinline!git fetch!} and 
 \textit{\lstinline!git merge!}. The command \textit{\lstinline!git pull!} is a combination of
-the two previous steps.
+these two steps.
 
-If there are no conflicting changes of the source code between the remote and the local
-versions, git is normally able to merge everything on its own flawlessly. Sooner or later every team
-faces the problem of conflicting and failing merges. The solution for such issues is not straight forward.
+If the remote and the local version do not contain any conflicting changes, 
+git should be able to merge everything on its own flawlessly. However, sooner or later every team
+faces the problem of conflicting and failing merges. Unfortunately the solution for such issues is not straight forward.
 Because the official documentation of git (\url{http://git-scm.com/documentation}) and a quick 
-\url{google.com} search may be most helpful, there is no further explanation provided within this paper.
+Internet search provides a variety of helpful procedures, 
+there is no further explanation provided within this paper.
 
-Especially during manual merging of conflicting source files, a graphical interface may be very helpful.
+Especially for manual merging of conflicting source files a graphical interface may be very helpful.
 
-Just as the (automatic or manual) merging is finished, it is highly recommended to compile 
-the Sweave and \LaTeX-file again to be sure that no new errors were introduced. When the merging and
-testing procedure is successfully finished, the local changes can be loaded to another remote repository
+Right after the (automatic or manual) merging is finished, it is highly recommended to compile 
+the Sweave and \LaTeX-file once again to be sure that no new errors were introduced. When the merging and
+testing procedure is successfully finished, the local changes can be transfered to another remote repository
 using \textit{\lstinline!git push!}.
 
-As uploading (pushing) needs the right to write on a remote location, more configuration is normally 
+As uploading (pushing) requires the right to write on a remote location, more configuration is usually 
 necessary. There are several possibilities to authenticate to a remote location, 
-including different additional tools, signation and encryption. Therefore no general explanation can be provided.
+including some additional tools, signation and encryption. Therefore no general explanation can be provided.
 
 The source of this paper is hosted by the free (git) provider \url{github.com}. As shown in 
 Listing \ref{git:clone}, it is quite easy to copy (clone) a project from their web-servers. 
@@ -334,15 +336,15 @@ git push
 \end{lstlisting}
 
 \subsection{git: further features}
-There are much more useful features of git waiting to be explored and used. Yet again
+There are much more useful features of git, waiting to be explored and used. Yet again
 official documentation on \url{http://git-scm.com/documentation} and practical
 tutorials, for example from \url{help.github.com}, are recommended.
 
-In the following listing, the most important 'advanced' features are summarized
+In the following listing the most important 'advanced' features are summarized
 (in alphabetical order):
 \begin{description}
 \item [add] \textit{\lstinline!git add!} is used to add newly created files (within the  folder managed by git) to the current repository.
-\item [{branch}] Different branches of the same code-base can be edited independent from
+\item [{branch}] Different branches of the same code-base can be edited independently from
 another. In fact, every local clone of a remote repository represents a (remote tracking) 
 branch. Branches may be combined using \textit{merge}.
 \item [checkout] Switching between different branches (and even create new branches) can
@@ -350,7 +352,7 @@ be established using \textit{\lstinline!git checkout!}. Even previously committe
 can be activated.
 \item [log] Using the command \textit{\lstinline!git log!} all previous commit messages of
 the currently activated branch are shown.
-\item [{rebase}] Rebase allows to easily change a series of commits, reordering, editing, or squashing commits together into a single commit. 
+\item [{rebase}] allows to easily change a series of commits, reordering, editing, or squashing commits together into a single one. 
 It is highly recommended that manipulating the history is performed with great care, because this is one of the 
 rare possibilities to actually loose changes or (under special circumstances) even destroy the repository.
 \item [reset] The \textit{\lstinline!git reset!} command is one of the most complicated
@@ -363,8 +365,8 @@ and informative introduction to the 'normal workflow' of git can be found here: 
 \item [status] \textit{\lstinline!git status!} shows the status of
 the currently activated branch. Most notably new and changed files which may be involved
 in the next commit are listed.
-\item [tag] Tags are special signs of committed versions. For example a specific revision
-of the repository of this paper is marked (tagged) as published.
+\item [tag] is a special label applied to a specific commit. For example a specific revision
+of this paper's repository is marked (tagged) as published.
 \end{description}
 
 
@@ -382,8 +384,8 @@ screenshot provided by http://www.syntevo.com/smartgit [2012-01-29]}
 Once the git repository is set up, the Sweave document has to be arranged. 
 In the following paragraphs involved technologies are briefly introduced.
 
-Some central properties are shared by all of them. Availability under a open source license, 
-platform independence, multilingualism, lots of documentation and a strong and proofen 
+Some essential properties are shared by all of them. Availability under an open source license, 
+platform independence, multilingualism, extensive documentation and a strong proven 
 community willing to help are the most important characteristics of these products.
 
 
@@ -396,36 +398,36 @@ contribute to the very rich environment of additional packages hosted
 mainly on “The Comprehensive R Archive Network” are good reasons to give R a try. 
 More advanced userRs (spelling “user” and “developer” with capital
 ’R’s is common in the R community) may use different extensions in 
-addition to the variety of basic packages a normal installation offers.
-Most packages provide worthwhile introductions and there is even extensive literature
+addition to the variety of basic packages a basic installation offers.
+Most packages provide worthwhile introductions and there even is special literature
 for some of them.
 
-R is mainly used through a command line interface. Although this - in comparison
+R is mainly used via a command line interface. Although this - in comparison
 to current graphical user interfaces outdated - way to communicate 
-with a computer program got a quite steep learning curve, practical 
-advantages induce many users to learn and stick with it. Mainly the
+with a computer program got a quite steep learning curve, the practical 
+advantages are convicting many users to stick with it. Mainly the
 ease of combining playful exploration of datasets and automatic
 reproduction of any steps taken, using script- or batch-files, are advantageous.
 
 Also the following examples, using special packages providing methods 
 for spatial data, may be executed on a simple terminal, a graphical front-end to R,
-a remote server or inside a Sweave document. This flexibility enables 
+a remote server or within a Sweave document. This flexibility enables 
 the usage of the same R source code within a database
 \footnote{for example \textit{plr} (\url{http://www.joeconway.com/plr/} [2012-01-30]) for PostgreSQL 
 \citep{group2011postgresql}}, a local PC and even servers and cloud services.
 
-Of course there are also some graphical user interfaces which may support
+Of course there also are some graphical user interfaces, which may support
 the usage of R. The most popular and beginner friendly solutions are
-Eclipse with the StatEt extension and the lately published RStudio
+Eclipse with the StatEt extension and the recently published RStudio
 (\url{http://rstudio.org/}). Both are open source and platform independent solution,
-which offer many other advantages like project management, integration of version 
+which offer lots of advantages like project management, integration of version 
 management (git), support for Sweave and a client/server separation.
 
 While Eclipse provides considerably more additional plugins and possibilities,
 RStudio can be highly recommended to all useRs.
 
 \subsection{Sweave}
-Sweave is defined in the official manual \citep{Sweave:Leisch:2002} as follows:
+In the official manual \citep{Sweave:Leisch:2002} Sweave is defined as follows:
 \begin{quotation}
 Sweave provides a flexible 
 framework for mixing text 
@@ -434,11 +436,11 @@ A single source file contains both documentation text and S code, which are then
 into a final document
 \end{quotation} 
 
-As explained above, R is an open source implementation of S.
+As explained before, R is an open source implementation of S.
 
 In 2002, Sweave was presented in the former "R Journal"
 (\url{http://journal.r-project.org/}) called "R News" (official archive of R News: \url{http://cran.r-project.org/doc/Rnews/}). In the first part of this 
-introduction, Sweave is summarized briefly \citep{Sweave:Leisch:2002}:
+introduction, Sweave is described briefly \citep{Sweave:Leisch:2002}:
 
 \begin{quotation}
 The purpose of Sweave is to create dynamic reports, 
@@ -452,11 +454,11 @@ document. The report can be automatically updated
 if data or analysis change, which allows for truly reproducible research.
 \end{quotation}
 
-Normally Sweave files got the file extension \texttt{.Rnw}. 
-After executing \texttt{R CMD Sweave} followed be the filename
+Usually Sweave files got the file extension \texttt{.Rnw}. 
+After executing \texttt{R CMD Sweave} followed by the filename
 of the Sweave document, all R-code is extracted from the document and executed using R.
 The results are merged with the \LaTeX{} code of the \texttt{.Rnw} file and saved
-to as \texttt{.tex} file with the same filename. Afterwards the common 
+as \texttt{.tex} file with the same filename. Afterwards the common 
 compilation using \texttt{latex}, \texttt{pdflatex}, \texttt{bibtex}, and relatives
 can be performed.
 
@@ -468,7 +470,7 @@ in the git repository, described in Listing \ref{git:clone} on page
 \pageref{git:clone}.
 
 At the beginning (line 1 to 5) of Listing \ref{sweave:simple}, a very simple
-\LaTeX-Document is shown. On line 6 an R-environment is declared using 
+\LaTeX-Document is shown. In line 6 an R-environment is declared using 
 the "noweb" syntax \citep{Ramsey_1994, Johnson_Johnson_2000}.
 Between \newline \texttt{<<label1, echo=false, results=hide>>=} \newline and the
 "at"-sign, R source code can be located. The header of the environment holds
@@ -482,15 +484,14 @@ be found in the official manual \citep{SweaveManual}.
 
 Some additional functionalities are shown in the example. The content of
 \texttt{\textbackslash{}Sexpr\{\#R-Code\}}
-is also executed by R and any output is included in the document. This may be
-quite useful if single values of an calculation should be inserted into 
-continuous text.
+is also executed by R and any output is included in the document. This can be
+useful when single values (of a calculation) are being inserted into continuous text.
 
 \texttt{\textbackslash{}SweaveInput\{filename\}} can be used to include 
 another Sweave file. Although importing additional source code can be realized with
-R, partitioning a document to several Sweave files is advisable.
+R, partitioning a document into several Sweave files is advisable.
 
-All single R environments which are executed in the same process share one
+All single R environments which are executed within the same process share one
 global namespace. Also libraries, like \texttt{xtable} (loaded on line 7), which eases the
 creation of \LaTeX-tables out of data stored in R, are
 available throughout the document.
@@ -498,9 +499,9 @@ available throughout the document.
 \input{./include/SweaveExample.tex}
 
 
-\section{Geospatial Plotting}
+\section{geospatial plotting}
 
-Finally the most important preparations are ready and some geospatial plots 
+Finally, as the most important preparations are finished, some geospatial plots 
 generated by R can be shown. In this document, a slightly more complex
 setup for Sweave is used. 
 
@@ -517,7 +518,7 @@ are configured and partly used, but not explained in more detail.
 
 \subsection{visualizing friendships of facebook users}
 The first example is not created by the author. It illustrates not only a
-quite beautiful graphic made with the help of R, but also inspired some
+beautiful graphic made with the help of R, but also caused
 public interest and many speculations, whether such picture can be
 created using an open source technology. (In fact R was used for plotting,
 but some reworking took place afterwards.) The map shows the relation of 
@@ -534,13 +535,13 @@ facebook friends \citep{FacebookFriendMap}.
 \subsection{map connections with great circles}
 After the mentioned discussion about the friendship plot of facebook users,
 Nathan Yau of \url{flowingdata.com} showed how to use great circles
-(Riemannian circle) provided by the \textit{geosphere} package. As example he chose to
+(Riemannian circle) provided by the \textit{geosphere} package. As an example he chose to
 visualize flight data of US 
 airports\footnote{\url{http://flowingdata.com/2011/05/11/how-to-map-connections-with-great-circles/}}.
 
-The presented plot is an adoption of this example. Open Data sources are downloaded from
+The presented plot is an adoption of this work. Open Data sources are downloaded from
 the Internet, combined and plotted within R and directly added to this document.
-Therefore, changing the displayed airline or plotting all airlines (in parallel using
+Therefore, changing the displayed airline or plotting more than one (in parallel using
 multiple processors simultaneously), can be easily achieved.
 
 \SweaveInput{./include/flight}
@@ -556,7 +557,7 @@ multiple processors simultaneously), can be easily achieved.
 \subsection{Google Earth and Open Street Map}
 Using the \textit{RgoogleMaps} package \citep{RgoogleMaps}, spatial data and
 pictures provided by Google can be downloaded. To get access to the 
-"Maps Image APIs" of Google, a special key is necessary. Although limited access would be free
+"Maps Image APIs" of Google a special key is necessary. Although limited access would be free
 of charge, the provided example uses data from the OpenStreetMap project 
 (\url{http://www.openstreetmap.org/}).
 
@@ -564,7 +565,7 @@ The package \textit{osmar 1.1-0} is specialized on the connection
 between R and OpenStreetMap, but was (at least at Debian Sid) quite hard to install
 and did not function correctly.
 
-A map of Vienna and parts of the surrounding area, which was loaded directly
+A map of Vienna and the surrounding region, which was loaded directly
 from OpenStreetMap using R, is displayed in the following example. 
 Also the manipulation of the map using coordinates is presented by marking
 Vienna University of Technology (TU Vienna).
@@ -586,29 +587,29 @@ the "GADM database of Global Administrative Areas" (\url{http://www.gadm.org/}).
 Maps in different granularity and formats are provided (for academic or
 non-profit reasons!) for free.
 
-After loading the file with R, some corrections of the text encoding has
+After loading the file with R, some corrections of the text encoding have
 to be performed. The data seems to be stored as "UTF-8", but wrongly
 imported and displayed in the "ISO-8859-2" format. After explicit conversion
 everything should run smoothly.
 
-To show off the possibilities of this map, some federal states are removed. 
+To show the possibilities of this map, some federal states are removed. 
 The coloring is created using a random heat-map. Only one region ("Tulln")
-is completely black. Additionally all borders are painted black and the names
+is completely black. Additionally all borders are painted black and the name
 of each district is displayed over the particular centroid (without collisions).
 
 \SweaveInput{./include/northAustria}
 
 
-\section{Result}
+\section{result}
 These simple examples 
-may induce a vision  of the vast possibilities of the presented techniques and 
-especially their combination. Integration with established systems like Grass,
+may induce a vision  of the vast possibilities the presented techniques, and 
+especially their combination, offer. Integration with established systems like Grass,
 utilization of Open Data and Open Government resources, cloud computing and many other 
-current trends can all be handled sophisticatedly. The low price and
-freedom open source software provides is just another argument to try out
+current trends can all be handled. The low price and
+freedom open source software provides is just another reason to try out
 these modern programs.
 
-Summarizing, not only the spatial plots themselves, but also the whole workflow
+Summarizing not only the spatial plots themselves, but also the entire workflow
 of a (distributed) project using Git, Sweave, R and LaTeX is the result and 
 message of this paper.
 
